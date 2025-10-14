@@ -1,5 +1,5 @@
 "use strict";
-// src/repositories/user.repository.ts
+Object.defineProperty(exports, "__esModule", { value: true });
 const db = require("../db");
 // Fungsi untuk mencari satu user berdasarkan emailnya
 // Ini akan kita gunakan untuk mengecek apakah user sudah terdaftar

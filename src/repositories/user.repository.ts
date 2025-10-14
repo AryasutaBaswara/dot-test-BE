@@ -1,4 +1,5 @@
 // src/repositories/user.repository.ts
+export {};
 const db = require("../db");
 
 // Fungsi untuk mencari satu user berdasarkan emailnya
