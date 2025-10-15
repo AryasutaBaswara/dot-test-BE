@@ -58,3 +58,39 @@ exports.deletePost = async (postId: number, userId: number) => {
   // 4. If the check passes, delete the post
   return postRepository.deletePost(postId);
 };
+
+// Logika bisnis untuk me-like sebuah postingan
+exports.likePost = async (userId: number, postId: number) => {
+  // Aturan #1: Pastikan postingan yang mau di-like itu ada
+  const post = await postRepository.findPostById(postId);
+  if (!post) {
+    throw new Error("Post not found");
+  }
+
+  // Aturan #2: Pastikan user belum pernah me-like postingan ini
+  const existingLike = await postRepository.findLike(userId, postId);
+  if (existingLike) {
+    throw new Error("You have already liked this post");
+  }
+
+  // Jika semua aturan terpenuhi, tambahkan like
+  return postRepository.addLike(userId, postId);
+};
+
+// Logika bisnis untuk unlike sebuah postingan
+exports.unlikePost = async (userId: number, postId: number) => {
+  // Aturan #1: Pastikan postingan yang mau di-unlike itu ada
+  const post = await postRepository.findPostById(postId);
+  if (!post) {
+    throw new Error("Post not found");
+  }
+
+  // Aturan #2: Pastikan user memang sudah pernah me-like postingan ini
+  const existingLike = await postRepository.findLike(userId, postId);
+  if (!existingLike) {
+    throw new Error("You have not liked this post");
+  }
+
+  // Jika semua aturan terpenuhi, hapus like
+  return postRepository.removeLike(userId, postId);
+};

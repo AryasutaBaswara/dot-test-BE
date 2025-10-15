@@ -19,4 +19,6 @@ postRoutes.patch("/:id", authMiddleware.authenticateToken, postController.handle
 // DELETE /api/posts/:id -> Hapus postingan
 // WAJIB punya token. Penjaga akan memeriksa tokennya dulu.
 postRoutes.delete("/:id", authMiddleware.authenticateToken, postController.handleDeletePost);
+postRoutes.post("/:id/like", authMiddleware.authenticateToken, postController.handleLikePost);
+postRoutes.delete("/:id/like", authMiddleware.authenticateToken, postController.handleUnlikePost);
 module.exports = postRoutes;

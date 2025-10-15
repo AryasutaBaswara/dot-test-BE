@@ -39,4 +39,16 @@ postRoutes.delete(
   postController.handleDeletePost
 );
 
+postRoutes.post(
+  "/:id/like",
+  authMiddleware.authenticateToken,
+  postController.handleLikePost
+);
+
+postRoutes.delete(
+  "/:id/like",
+  authMiddleware.authenticateToken,
+  postController.handleUnlikePost
+);
+
 module.exports = postRoutes;

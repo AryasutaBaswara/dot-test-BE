@@ -42,3 +42,27 @@ exports.deletePost = async (postId: number) => {
   const { rows } = await db.query(queryText, [postId]);
   return rows[0];
 };
+
+// Fungsi untuk mencari apakah user sudah pernah me-like post ini
+exports.findLike = async (userId: number, postId: number) => {
+  const queryText =
+    'SELECT * FROM "PostLikes" WHERE "userId" = $1 AND "postId" = $2';
+  const { rows } = await db.query(queryText, [userId, postId]);
+  return rows[0];
+};
+
+// Fungsi untuk menambahkan like baru ke tabel PostLikes
+exports.addLike = async (userId: number, postId: number) => {
+  const queryText =
+    'INSERT INTO "PostLikes"("userId", "postId") VALUES($1, $2) RETURNING *';
+  const { rows } = await db.query(queryText, [userId, postId]);
+  return rows[0];
+};
+
+// Fungsi untuk menghapus like dari tabel PostLikes
+exports.removeLike = async (userId: number, postId: number) => {
+  const queryText =
+    'DELETE FROM "PostLikes" WHERE "userId" = $1 AND "postId" = $2 RETURNING *';
+  const { rows } = await db.query(queryText, [userId, postId]);
+  return rows[0];
+};
