@@ -1,6 +1,5 @@
 "use strict";
-// src/routes/post.routes.ts
-//  // Mencegah error 'redeclare block-scoped variable'
+Object.defineProperty(exports, "__esModule", { value: true });
 const { Router } = require("express");
 const postController = require("../controllers/post.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
