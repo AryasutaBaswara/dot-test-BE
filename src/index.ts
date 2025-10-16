@@ -16,6 +16,9 @@ app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api", commentRoutes);
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
+  // Simpan di variabel 'server'
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+module.exports = { app, server };
